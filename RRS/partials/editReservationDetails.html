@@ -1,0 +1,114 @@
+
+<section>
+    <div class="container" id = "index">
+
+        <ul class="nav nav-tabs nav-justified">
+            <li ng-class="{ active:customerCtrl1.isSet(1) }">
+                <a ng-click="customerCtrl1.setTab(1)">EDIT A RESERVATION</a>
+            </li>
+        </ul>
+
+        <!--edit-reservation-tab content-->
+        <div ng-show="customerCtrl1.isSet(1)">
+            <div class = "tab-content">
+                <div id="edit-reservation-tab">
+                    <form novalidate role="form" name="userForm">
+
+                        <div class="row">
+
+                            <div class="form-group col-xs-6">
+                                <label for="Date">Date <i class="fa fa-calendar"></i></label>
+                                <input ng-model="customerCtrl1.reservation.date" type="text" class="form-control" name="date" id="date" placeholder="mm/dd/yyyy"
+                                       ng-pattern="/^(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/(199\d|[2-9]\d{3})$/" required
+                                       ng-class="{ 'has-error' : userForm.date.$invalid && userForm.$submitted }"/>
+                                <div ng-messages="userForm.date.$error"
+                                     ng-if="userForm.date.$dirty || userForm.date.$touched || userForm.$submitted">
+                                    <p ng-message="required" class="help-block">*Date is required</p>
+                                    <p ng-message="pattern" class="help-block">*Invalid Date</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-6">
+                                <label for="Time">Time <i class="fa fa-clock-o"></i></label>
+                                <input ng-model="customerCtrl1.reservation.time" name="time" type="text" class="form-control" id="time"
+                                       ng-pattern="/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/" placeholder="HH:MM AM|PM" required
+                                       ng-class="{ 'has-error' : userForm.time.$invalid && userForm.$submitted }"/>
+                                <div ng-messages="userForm.time.$error"
+                                     ng-if="userForm.time.$dirty || userForm.time.$touched || userForm.$submitted">
+                                    <p ng-message="required" class="help-block">*Time is required</p>
+                                    <p ng-message="pattern" class="help-block">*Invalid Time</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-xs-6">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" ng-model="customerCtrl1.reservation.name" required
+                                       ng-class="{ 'has-error' : userForm.name.$invalid && userForm.$submitted }"/>
+                                <div ng-messages="userForm.name.$error"
+                                     ng-if="userForm.name.$dirty || userForm.name.$touched || userForm.$submitted">
+                                    <p ng-message="required" class="help-block">*Name is required</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-6">
+                                <label for="Phone">Phone <i class="fa fa-phone"></i></label>
+                                <input type="text" class="form-control" id="phone" name="phone" ng-pattern="/^[0-9]{10}$/" placeholder="Phone" ng-model="customerCtrl1.reservation.phone" required
+                                       ng-class="{ 'has-error' : userForm.phone.$invalid && userForm.$submitted }"/>
+                                <div ng-messages="userForm.phone.$error"
+                                     ng-if="userForm.phone.$dirty || userForm.phone.$touched || userForm.$submitted">
+                                    <p ng-message="required" class="help-block">*Phone is required</p>
+                                    <p ng-message="pattern" class="help-block">*Phone should be 10digit long</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <i class="fa fa-envelope-o"></i></label>
+                            <input name="email" ng-model="customerCtrl1.reservation.email" type="email" class="form-control" id="email" required="" placeholder="example@domain.com"
+                                   ng-class="{ 'has-error' : userForm.email.$invalid && userForm.$submitted }"/>
+                            <div ng-messages="userForm.email.$error"
+                                 ng-if="userForm.email.$dirty || userForm.email.$touched || userForm.$submitted">
+                                <p ng-message="required" class="help-block">*Email is required</p>
+                                <p ng-message="email" class="help-block">*Email is invalid</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-4">
+                                <label for="Party Size">Party Size <i class="fa fa-users"></i></label>
+                                <input name="party_size" ng-model="customerCtrl1.reservation.party_size" type="text"
+                                       class="form-control" id="party size" placeholder="# Guests" required
+                                       ng-class="{ 'has-error' : userForm.party_size.$invalid && userForm.$submitted }"/>
+                                <div ng-messages="userForm.party_size.$error" ng-if="userForm.party_size.$dirty || userForm.party_size.$touched || userForm.$submitted">
+                                    <p ng-message="required" class="help-block">*Please enter number of guests</p>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-8">
+                                <label for="Type of party">Type of Party <i class="fa fa-glass"></i></label>
+                                <input name="party_type" ng-model="customerCtrl1.reservation.party_type" type="text" class="form-control" id="Type of party" placeholder="eg: birthday, annivarsary" />
+                            </div>
+                        </div>
+
+                        <div class="text-center" id="ReserveButton">
+                            <button type="submit" class="btn btn-default"
+                                    ng-click="customerCtrl1.changeReservation(userForm.$valid)">Change Reservation</button>
+                        </div>
+
+                    </form>
+
+                    <!--<make-reservation-pop-up ng-show="customerCtrl1.pop_up1" show="customerCtrl1.pop_up1"-->
+                                             <!--width="500px" height="90%" confirmation-code="{{customerCtrl1.confirmation_code}}">-->
+                    <!--</make-reservation-pop-up>-->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<footer></footer>

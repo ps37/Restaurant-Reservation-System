@@ -1,0 +1,21 @@
+[
+  {
+    "confirmation_code" : "1234",
+    "date" : "12/12/2015",
+    "email" : "prudhvi.af121@gmail.com",
+    "name" : "prudhvi chandra simhadri",
+    "party_size" : "4",
+    "time" : "09:10 AM",
+    "phone" : "8888888888"
+  },
+
+  {
+    "confirmation_code" : "qwerty",
+    "date" : "30/01/1915",
+    "email" : "prudhvi.af121@hotmail.com",
+    "name" : "prudhvi",
+    "party_size" : "14",
+    "time" : "12:10 AM",
+    "phone" : "9999999999"
+  }
+]

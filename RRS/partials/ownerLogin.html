@@ -1,0 +1,46 @@
+<section>
+    <div class="container" id="home">
+        <ul class="nav nav-tabs nav-justified">
+            <li ng-class="{ active:ownerCtrl.isSet(1) }">
+                <a ng-click="ownerCtrl.setTab(1)">LOGIN</a>
+            </li>
+        </ul>
+
+        <div ng-show="ownerCtrl.isSet(1)">
+            <div class="tab-content">
+                <div id="tab-login">
+                    <form novalidate name="ownerLoginForm" role="form"
+                            ng-submit="ownerCtrl.onLogin(ownerLoginForm.$valid)">
+                        <div class="form-group">
+
+                            <label for="email">Email <i class="fa fa-envelope-o"></i></label>
+                            <input name="email" ng-model="ownerCtrl.login.email" type="email" class="form-control" id="email" required placeholder="example@domain.com"
+                                   ng-class="{ 'has-error' : ownerLoginForm.email.$invalid && ownerLoginForm.$submitted }"/>
+                            <div ng-messages="ownerLoginForm.email.$error"
+                                 ng-if="ownerLoginForm.email.$dirty || ownerLoginForm.email.$touched || ownerLoginForm.$submitted">
+                                <p ng-message="required" class="help-block">*Email is required</p>
+                                <p ng-message="email" class="help-block">*Email is invalid</p>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="code">Password</label>
+                            <input name="password" ng-model="ownerCtrl.login.password" type="password" class="form-control" id="code" placeholder="Enter Password" required
+                                   ng-class="{ 'has-error' : ownerLoginForm.email.$invalid && ownerLoginForm.$submitted }"/>
+                            <div ng-messages="ownerLoginForm.password.$error"
+                                 ng-if="ownerLoginForm.password.$dirty || ownerLoginForm.password.$touched || ownerLoginForm.$submitted">
+                                <p ng-message="required" class="help-block">*password is required</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-default">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<footer></footer>
