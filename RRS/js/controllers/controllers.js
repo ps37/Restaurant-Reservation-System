@@ -12,7 +12,6 @@
         var self = this;
         self.tabNum = 1;
         self.reservation = {};
-        //self.matchedReservation = {};
         self.reservationList = [];
         self.confirmation_code = "";
         self.pop_up1 = false;
@@ -27,50 +26,51 @@
         };
 
         self.makeReservation = function(isValid){
-            //once this func is called, the object with "reservation" details has to be posted to the server and
-            //a condition has to be set for window popping with corresponding expressions.
             if(!isValid){
                 alert("Please Correct the erors!");
             };
 
             if(isValid){
-                alert("Your reservation request is submitted. Please wait for the confirmation status!");
-                self.reservation.confirmation_code = "1234";
-                self.confirmation_code = self.reservation.confirmation_code;
-                self.pop_up1 = true;
-                self.reservationList.push(self.reservation);
-                console.dir(self.reservationList);
-                self.reservation = {};
+                requestFactory.postData(self.reservation)
+                    .success(function(data){
+                        if(data.status === "success"){
+                            console.log(data);
+                            self.confirmation_code = data.payload.id;
+                            self.reservation = {};
+                            self.pop_up1 = true;
+                        }
+                        else if(data.status === "error"){
+                            console.log(data);
+                            alert(data.message);
+                        }
+                    })
+                    .error(function(error){
+                        console.log(error);
+                        alert("There is an error contacting the server!");
+                    });
+
             };
 
         };
 
         self.getReservation = function(isValid){
-            //console.dir(this);
             var reserveation_match = false;
             if(!isValid){
                 alert("Please enter valid confirmation code!");
             };
 
             if(isValid){
-
-                requestFactory.getData()
+                requestFactory.getData(self.confirmation_code)
                     .success(function (data) {
-                        self.reservationList = data;
 
-                        for(var reservation in self.reservationList){
-                            //console.dir(self.reservationList[reservation]);
-                            if(self.confirmation_code === self.reservationList[reservation].confirmation_code){
-                                reserveation_match = true;
-                                self.matchedReservation = self.reservationList[reservation];
-                                self.pop_up2 = true;
-                                console.dir(self.matchedReservation);
-                                break;
-                            }
+                        if(data.status === "success"){
+                            self.matchedReservation = data.payload;
+                            self.pop_up2 = true;
+                            console.log("matched reservation", self.matchedReservation);
                         }
-                        if(reserveation_match === false){
-                            alert("There is no reservation with the given confirmation code..");
-                            console.dir(self.confirmation_code);
+                        else if(data.status === "error"){
+                            console.log(data);
+                            alert(data.message);
                         }
                     })
                     .error(function(){
@@ -80,89 +80,142 @@
         };
 
         self.deleteReservation = function(){
-            console.dir(self.reservationList);
-            for(var reservation in self.reservationList){
-                if(self.matchedReservation.confirmation_code === self.reservationList[reservation].confirmation_code){
-                    self.reservationList.splice(reservation, 1);
-                    console.dir(self.reservationList);
-                    break;
-                }
-            }
+
+            requestFactory.deleteData(self.confirmation_code)
+                .success(function(data){
+                    if(data.status === "success"){
+                        alert("Your Reservation has been cancelled!")
+                    }
+                    else if(data.status === "error"){
+                        console.log(data);
+                        alert(data.message);
+                    }
+                })
+                .error(function(data){
+                    alert("request to server has failed!");
+                })
         };
 
         self.editReservation = function(){
             console.log('I am in edit scope baby!');
-            editReservationFactory.getConfirmationCode(self.matchedReservation.confirmation_code);
+            editReservationFactory.putConfirmationCode(self.matchedReservation.id);
             $location.path('/editReservationDetails');
         };
 
         self.changeReservation = function(isValid){
-            var changingReservationCode = editReservationFactory.giveConfirmationCode();
-            self.reservation.confirmation_code = changingReservationCode;
+            var changingReservationCode = editReservationFactory.getConfirmationCode();
             console.log('I am in change Reservation');
+            if(!isValid){
+                alert("Please Correct the erors!");
+            };
             if(isValid){
-
-                requestFactory.getData()
-                    .success(function (data) {
-                        self.reservationList = data;
-                        for(var reservation in self.reservationList){
-                            //console.dir(self.reservationList[reservation]);
-                            if(self.reservation.confirmation_code === self.reservationList[reservation].confirmation_code){
-                                console.dir(self.reservationList);
-                                self.reservationList[reservation] = self.reservation;
-                                console.dir(self.reservationList);
-                                alert("Your Reservation Details are now changed with same confirmation code");
-                                break;
-                            }
+                requestFactory.editData(changingReservationCode, self.reservation)
+                    .success(function(data){
+                        if(data.status === "success"){
+                            console.log(data);
+                            alert("Your reservation details have been changed successfully!" +
+                                " and your confirmation code is same as before. Please check " +
+                                "your updated details by entering your confirmation code in the" +
+                                " following window inside 'change/cancel reservation' panel.");
                         }
-                        $location.path('/customer');
+                        else if(data.status === "error"){
+                            console.log(data);
+                            alert(data.message);
+                        }
                     })
-                    .error(function(){
-                        alert("request to server has failed!");
+                    .error(function(error){
+                        console.log(error);
+                        alert("There is an error contacting the server!");
                     });
             };
+            $location.path('/customer');
 
         };
 
     }]);
 
-    controllers.controller('OwnerController', ['$location', function($location){
-        var ownerCtrl = this;
-        ownerCtrl.tabNum = 1;
+    controllers.controller('OwnerController', ['requestFactory', '$location', function(requestFactory, $location){
+        var self = this;
+        self.tabNum = 1;
         //get the login credentials from the server
-        ownerCtrl.login = {};
-        ownerCtrl.loginCredentials = {
-            email: "prudhvi.af121@gmail.com",
-            password: "Qwerty12#"
+        self.login = {};
+        self.loginCredentials = {};
+        self.ownerProfile = {};
+
+        self.setTab = function(tabNumber){
+            self.tabNum = tabNumber;
         };
 
-        ownerCtrl.setTab = function(tabNumber){
-            ownerCtrl.tabNum = tabNumber;
+        self.isSet = function(tabSelected){
+            return self.tabNum === tabSelected;
         };
 
-        ownerCtrl.isSet = function(tabSelected){
-            return ownerCtrl.tabNum === tabSelected;
-        };
+        self.onLogin = function(isValid){
 
-        ownerCtrl.onLogin = function(isValid){
-            //get the user login credentials from the server and check them here
             if(isValid){
-                if(ownerCtrl.login.email === ownerCtrl.loginCredentials.email){
-                    if(ownerCtrl.login.password === ownerCtrl.loginCredentials.password){
-                        $location.path('/owner');
-                    }
-                    else{
-                        alert("The password is incorrect!");
-                    }
-                }
-                else{
-                    alert("The email is incorrect")
-                }
+
+                requestFactory.getLoginInfo()
+                    .success(function (data) {
+                        if(data.status === "success"){
+                            console.log(data);
+                            //get the user login credentials from the server
+                            self.ownerProfile = data.payload;
+                            self.loginCredentials.email = self.ownerProfile.email;
+                            self.loginCredentials.password = self.ownerProfile.password;
+                            console.log("login credentials", self.loginCredentials);
+                            //and check them here
+                            if(self.login.email === self.loginCredentials.email){
+                                if(self.login.password === self.loginCredentials.password){
+                                    $location.path('/owner');
+                                }
+                                else{
+                                    alert("The password is incorrect!");
+                                }
+                            }
+                            else{
+                                alert("The email is incorrect")
+                            }
+                        }
+                        else if(data.status === "error"){
+                            console.log(data);
+                            alert(data.message);
+                        }
+                    })
+                    .error(function(){
+                        alert("request to server has failed!");
+                    });
+
             }
             if(!isValid){
                 alert("Please correct the errors!")
             }
         };
+
+        self.updateProfile = function(isValid){
+            if(isValid){
+
+                requestFactory.updateProfile(self.ownerProfile)
+                    .success(function (data) {
+                        if(data.status === "success"){
+                            alert("Your profile has been udated! " +
+                                "Please login with updated details in the following window");
+                            $location.path('ownerLogin');
+                        }
+                        else if(data.status === "error"){
+                            console.log(data);
+                            alert(data.message);
+                        }
+                    })
+                    .error(function(){
+                        alert("request to server has failed!");
+                    });
+
+            }
+
+            else if(!isValid){
+                alert("Please correct the errors!");
+            };
+        }
 
 
     }]);

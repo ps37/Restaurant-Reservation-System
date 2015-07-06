@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="code">Password</label>
                             <input name="password" ng-model="ownerCtrl.login.password" type="password" class="form-control" id="code" placeholder="Enter Password" required
-                                   ng-class="{ 'has-error' : ownerLoginForm.email.$invalid && ownerLoginForm.$submitted }"/>
+                                   ng-class="{ 'has-error' : ownerLoginForm.password.$invalid && ownerLoginForm.$submitted }"/>
                             <div ng-messages="ownerLoginForm.password.$error"
                                  ng-if="ownerLoginForm.password.$dirty || ownerLoginForm.password.$touched || ownerLoginForm.$submitted">
                                 <p ng-message="required" class="help-block">*password is required</p>

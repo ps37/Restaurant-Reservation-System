@@ -60,6 +60,7 @@
             restrict: 'AE',
 
             scope: {confirmationCode: '@confirmationCode',
+                reservationStatus: '@reservationStatus',
                 show: '=show'},
 
             transclude: false,
@@ -86,9 +87,9 @@
             restrict: 'AE',
 
             scope: {matchedReservation: '=matchedReservation',
-            show: '=show',
-            deleteReservation: '&deleteReservation',
-            editReservation: '&editReservation'},
+                show: '=show',
+                deleteReservation: '&deleteReservation',
+                editReservation: '&editReservation'},
 
             transclude: false,
 
