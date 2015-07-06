@@ -1,0 +1,64 @@
+
+<section>
+    <div class="container" id="OwnerHome">
+        <!--List Of Tabs.-->
+        <ul class="nav nav-tabs nav-justified">
+            <li ng-class="{ active:ownerCtrl1.isSet(1) }">
+                <a ng-click="ownerCtrl1.setTab(1)"><i class="fa fa-calendar"></i>
+                    <span class = "tab-heading">Reservations</span> </a>
+            </li>
+            <li ng-class="{ active:ownerCtrl1.isSet(2) }">
+                <a ng-click="ownerCtrl1.setTab(2)"><i class="fa fa-th"></i>
+                    <span class = "tab-heading">Seating</span> </a>
+            </li>
+            <li ng-class="{ active:ownerCtrl1.isSet(3) }">
+                <a ng-click="ownerCtrl1.setTab(3)"><i class="fa fa-list"></i>
+                    <span class = "tab-heading">Profile</span> </a>
+            </li>
+            <li ng-class="{ active:ownerCtrl1.isSet(4) }">
+                <a ng-click="ownerCtrl1.setTab(4)"><i class="fa fa-cogs"></i>
+                    <span class = "tab-heading">App Settings</span> </a>
+            </li>
+            <li ng-class="{ active:ownerCtrl1.isSet(5) }">
+                <a ng-click="ownerCtrl1.setTab(5)"><i class="fa fa-user"></i>
+                    <span class = "tab-heading">Contacts</span> </a>
+            </li>
+        </ul>
+
+        <!--content of the tabs-->
+        <div ng-show="ownerCtrl1.isSet(1)">
+            <div class="tab-content">
+                <reservations-tab></reservations-tab>
+            </div>
+        </div>
+
+        <div ng-show="ownerCtrl1.isSet(2)">
+            <div class="tab-content">
+                <div seating-tab></div>
+            </div>
+        </div>
+
+
+        <div ng-show="ownerCtrl1.isSet(3)">
+            <div class="tab-content">
+                <profile-tab></profile-tab>
+            </div>
+        </div>
+
+        <div ng-show="ownerCtrl1.isSet(4)">
+            <div class="tab-content">
+                <settings-tab></settings-tab>
+            </div>
+        </div>
+
+        <div ng-show="ownerCtrl1.isSet(5)">
+            <div class="tab-content">
+                <contacts-tab></contacts-tab>
+            </div>
+        </div>
+    <!--The end div tag of container-->
+    </div>
+
+</section>
+<footer></footer>
+

@@ -1,0 +1,24 @@
+<div class='ng-modal'>
+
+    <div class='ng-modal-overlay' ng-click='hideModal()'>
+
+    </div>
+
+    <div class='ng-modal-dialog' ng-style='dialogStyle'>
+
+        <div class='ng-modal-close' ng-click='hideModal()'>X</div>
+
+        <div class='ng-modal-dialog-content'>
+            <hr>
+            <p>Your Reservation Request is submitted!</p>
+            <p>Your Confirmation Code is: <strong> {{confirmationCode}}</strong></p>
+            <!-- <p>Your Reservation Status is: <strong> {{reservationStatus}}</strong></p> --> 
+            <p>Please check the STATUS of your Reservation and your Reservation details
+            by entering your <em>confirmation code </em>in the <strong><em> Change/Cancel Reservation tab</em></strong></p>
+            <p>THANK YOU!</p>
+            </hr>
+        </div>
+
+    </div>
+
+</div>
