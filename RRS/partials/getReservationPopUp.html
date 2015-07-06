@@ -1,0 +1,32 @@
+<div class='ng-modal'>
+
+    <div class='ng-modal-overlay' ng-click='hideModal()'>
+
+    </div>
+
+    <div class='ng-modal-dialog' ng-style='dialogStyle'>
+
+        <div class='ng-modal-close' ng-click='hideModal()'>X</div>
+
+        <div class='ng-modal-dialog-content'>
+
+            <hr>
+                <h7><strong>THE RESERVATION DETAILS ARE</strong></h7>
+                <p>Name reserved under: {{matchedReservation.name}}</p>
+                <p>Date of reservation: {{matchedReservation.date}}</p>
+                <p>Time of reservation: {{matchedReservation.time}}</p>
+                <p>Contact Number: {{matchedReservation.phone}}</p>
+                <p>Party Size: {{matchedReservation.party_size}}</p>
+                <p><strong>Reservation Status: {{matchedReservation.reservationStatus}}</strong></p> 
+                <p id="mainButtons">
+                <ul class="list-inline intro-social-buttons">
+                    <li><a href="" ng-click="deleteReservation()" class="btn btn-default btn-lg">Cancel Reservation</a></li>
+                    <li><a href="" ng-click="editReservation()" class="btn btn-default btn-lg">Edit Reservation</a></li>
+                </ul>
+                </p>
+            </hr>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,67 @@
+<div class="tab-pane" id="tab-profile">
+    <p><h7>EDIT PROFILE</h7></p>
+    <form novalidate role="form" name="profileForm"
+          ng-submit="ownerCtrl1.updateProfile(profileForm.$valid)">
+        <div class="form-group">
+
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Prudhvi Chandra"
+                   ng-model="ownerCtrl1.ownerProfile.name" required
+                   ng-class="{ 'has-error' : profileForm.name.$invalid && profileForm.$submitted }"/>
+            <div ng-messages="profileForm.name.$error"
+                 ng-if="profileForm.name.$dirty || profileForm.name.$touched || profileForm.$submitted">
+                <p ng-message="required" class="help-block">*Name is required</p>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="contact">Phone <i class="fa fa-phone"></i></label>
+            <input type="text" class="form-control" id="contact" name="contact" ng-pattern="/^[0-9]{10}$/" placeholder="888-888-0000"
+                   ng-model="ownerCtrl1.ownerProfile.contact" required
+                   ng-class="{ 'has-error' : profileForm.contact.$invalid && profileForm.$submitted }"/>
+            <div ng-messages="profileForm.contact.$error"
+                 ng-if="profileForm.contact.$dirty || profileForm.contact.$touched || profileForm.$submitted">
+                <p ng-message="required" class="help-block">*Phone is required</p>
+                <p ng-message="pattern" class="help-block">*Phone should be 10digit long</p>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="email">New Login Email <i class="fa fa-envelope-o"></i></label>
+            <input name="email" ng-model="ownerCtrl1.ownerProfile.email" type="email" class="form-control" id="email" required placeholder="example@domain.com"
+                   ng-class="{ 'has-error' : profileForm.email.$invalid && profileForm.$submitted }" autocomplete="off"/>
+            <div ng-messages="profileForm.email.$error"
+                 ng-if="profileForm.email.$dirty || profileForm.email.$touched || profileForm.$submitted">
+                <p ng-message="required" class="help-block">*Email is required</p>
+                <p ng-message="email" class="help-block">*Email is invalid</p>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="code">New Login Password</label>
+            <input name="password" ng-model="ownerCtrl1.ownerProfile.password" type="password" class="form-control" id="code" placeholder="Please Enter New Password" required
+                   ng-class="{ 'has-error' : profileForm.password.$invalid && profileForm.$submitted }" autocomplete="off"/>
+            <div ng-messages="profileForm.password.$error"
+                 ng-if="profileForm.password.$dirty || profileForm.password.$touched || profileForm.$submitted">
+                <p ng-message="required" class="help-block">*Please enter a new password</p>
+            </div>
+
+        </div>
+        
+         <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="111street Naperville Chicago IL"
+                   ng-model="ownerCtrl1.ownerProfile.address" autocomplete="off">
+        </div>
+        
+        <div class="text-center">
+            <button type="submit" class="btn large-btn btn-default">Update</button>
+        </div>
+    </form>
+</div>

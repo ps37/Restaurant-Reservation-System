@@ -1,0 +1,228 @@
+/* Styles go here */
+
+html {
+    /*background-image: -webkit-radial-gradient(circle, rgb(253, 226, 199), rgb(174, 104, 34));*/
+    /*background-attachment: fixed;*/
+    /*background-repeat: no-repeat;*/
+    background-image: url("../images/intro1.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background: none;
+}
+.navbar-default {
+    background-color: #FFCC99;
+    border-color: #FFCC99;
+}
+section {
+    margin: 50px 10px;
+}
+.container {
+    font-size:0.9em;
+    box-shadow: 0 0 10px 2px #FFF;
+    padding:0px;
+    border-radius: 10px;
+}
+
+.jumbotron{
+    margin-top: 80px;
+    text-align: center;
+    background: transparent;
+
+}
+
+#mainButtons{
+    margin-top: 50px;
+}
+
+#homeButton{
+    color: #555555;
+}
+
+.tab-content {
+    padding: 30px;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+}
+
+.nav-tabs a {
+    font-weight: bold;
+    color: #555555;
+    background-color: #DF9A56;
+    font-size: 0.9em;
+}
+.nav-tabs.nav-justified>.active>a,
+.nav-tabs.nav-justified>.active>a:hover {
+    border: 1px solid #FFF;
+}
+.nav-tabs.nav-justified>li>a {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.tab-content>.tab-pane {
+    padding-bottom: 20px;
+}
+
+.tab-pane h7 {
+    color: #E57A20;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.form-group {
+    color: #E57A20;
+}
+input.form-control {
+    box-shadow: 0 0 2px #E57A20;
+}
+.btn-default {
+    background-color: #DF9A56;
+    color: #555555;
+    font-weight: 500;
+}
+
+#change_reservation,
+#Forgot_Password {
+    color: #E57A20;
+}
+.pagination>li>a{
+    color: #E57A20;
+}
+
+.pagination>li.active>a {
+    color:white;
+    background-color: #E57A20;
+}
+
+.btn-primary{
+    background-color: #DF9A56;
+    border-color: #DF9A56;
+}
+
+.table-striped>tbody>tr:nth-child(odd) {
+    background-color: #F9C89A;
+}
+
+ul.nav-tabs.nav-justified>li {
+    display: table-cell;
+    width: 1%;
+}
+
+.table-responsive {
+    width:100%;
+}
+
+#seating-tab .container {
+    padding-left: 4px;
+    padding-right: 4px;
+    width: auto;
+}
+
+#seating-tab .occupied-table {
+    width: 120px;
+    height: 120px;
+    background: #FFCC99;
+    margin: 10px auto;
+    padding-top: 20px;
+}
+#seating-tab .occupied-table p {
+    color: white;
+    margin: 4px auto;
+    width: 100px;
+    text-align: center;
+}
+
+.btn-filler{
+    background-color: transparent;
+    padding:13px;
+}
+
+.btn-link{
+    color:#F09A44;
+}
+
+#seating-tab .occupied-table p .btn{
+    color:white;
+}
+
+@media (min-width: 512px) {
+    .container {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 1024px) {
+    .nav-tabs.nav-justified>li>a>span {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .tab-content {
+        padding: 50px;
+    }
+}
+
+.help-block {
+    color: red;
+    font-weight: 500;
+}
+
+input.has-error{
+    border-color: red;
+    /*border-width: 1.5px;*/
+    box-shadow: 0 0 5px red;
+}
+
+/*for the pop-up window*/
+.ng-modal-overlay {
+    /* A dark translucent div that covers the whole screen */
+    position:absolute;
+    z-index:9999;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:#000000;
+    opacity: 0.8;
+}
+.ng-modal-dialog {
+    /* A centered div above the overlay with a box shadow. */
+    z-index:10000;
+    position: absolute;
+    width: 50%; /* Default */
+
+    /* Center the dialog */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+
+    background-color: #ffd59a;
+    border-radius: 10px;
+    box-shadow: 4px 4px 80px #000;
+}
+.ng-modal-dialog-content {
+    padding:10px;
+    margin: auto;
+    text-align: center;
+}
+.ng-modal-close {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 120%;
+    display: inline-block;
+    font-weight: bold;
+    font-family: 'arial', 'sans-serif';
+}
+
+
+
+
